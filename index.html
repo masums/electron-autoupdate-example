@@ -13,11 +13,18 @@
             // changes the text of the button
             var container = document.getElementById('ready');
             container.innerHTML = "new version ready!";
-        })
+        });
+
+        const appVersion = window.require('electron').remote.app.getVersion();
     </script>
     Version: <span id="version">v0.1.10</span>
     <!-- the button onClick sends a quitAndInstall message to the electron main process -->
     <button id="ready" onClick="ipcRenderer.send('quitAndInstall')">no updates ready</button>
+
+    <script>
+        var container = document.getElementById('version');
+            container.innerHTML = window.require('electron').remote.app.getVersion();
+    </script>
 
 </body>
 

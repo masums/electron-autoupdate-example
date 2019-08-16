@@ -1,20 +1,56 @@
 {
-    "name": "electronautoupdate",
-    "version": "0.1.10",
-    "author": "ZaninAndrea",
-    "homepage": "./",
-    "description": "An example of an autoupdating electron app",
-    "repository": "https://github.com/ZaninAndrea/electron-autoupdate-example",
-    "main": "electron.js",
-    "dependencies": {
-        "electron-updater": "^2.10.1"
+  "name": "electronautoupdate",
+  "version": "0.1.9",
+  "author": "ZaninAndrea",
+  "homepage": "http://github.com/masums/electron-autoupdate-example",
+  "description": "An example of an autoupdating electron app",
+  "repository": "https://github.com/masums/electron-autoupdate-example",
+  "main": "electron.js",
+  "dependencies": {
+    "electron-updater": "^4.1.2"
+  },
+  "scripts": {
+    "postinstall": "electron-builder install-app-deps",
+    "build":"electron-builder",
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "publish": "electron-builder -p always"
+  },
+  "devDependencies": {
+    "electron": "^6.0.2",
+    "electron-builder": "^21.2.0"
+  },
+  "build": {
+    "appId": "electronautoupdate",
+    "compression": "maximum",
+    "asar": false,
+    "mac": {
+      "category": "public.app-category.education"
     },
-    "scripts": {
-            "build": "build --win",
-            "ship": "build --win -p always"
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
         },
-    "devDependencies": {
-        "electron": "^1.7.5",
-        "electron-builder": "^19.20.1"
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "win": {
+      "target": "NSIS",
+      "icon": "build/icon.ico"
     }
+  }
 }
